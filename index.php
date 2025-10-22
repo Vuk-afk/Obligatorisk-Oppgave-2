@@ -11,19 +11,13 @@
             <ul>
                 <li><a href="Registrer_klasse.php">Registrer klasse</a></li>
                 <li><a href="Vis_alle_klasser.php">Gruppekontrakt</a></li>
-                <li><a href="html-css.html">HTML/CSS</a></li>
-                <li><a href="personas.html">Personas</a></li>
-                <li><a href="ia-wireframes.html">IA & Wireframes</a></li>
-                <li><a href="universell.html">Universell utforming</a></li>
-                <li><a href="brukerhistorier.html">Brukerhistorier</a></li>
+                <li><a href="Slett_klasse.php">Slett klasse</a></li>
+                <li><a href="Registrer_student.php">Registrer student</a></li>
+                <li><a href="Vis_alle_studenter.php">Vis alle studenter</a></li>
+                <li><a href="Slett_student.php">Slett student</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <h2>Velkommen til vÃ¥rt prosjekt</h2>
-        <p>Denne nettsiden er laget som en del av gruppeoppgaven. 
-           Her finner du vÃ¥re ulike leveranser som egne undersider.</p>
-    </main>
     <footer>
         <p>Vuk</p>
     </footer>
