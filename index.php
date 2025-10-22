@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <p>Brukerfunksjoner</p>
+</body>
     <header>
         <nav aria-label="Hovedmeny">
             <ul>
