@@ -1,0 +1,63 @@
+<?php
+mysqli_report(MYSQLI_REPORT_OFF);
+$host = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASS');
+if ($password === false) {
+    $password = getenv('DB_PASSWORD');
+}
+$database = getenv('DB_NAME');
+if ($database === false) {
+    $database = getenv('DB_DATABASE');
+}
+$db = mysqli_connect($host, $username, $password, $database) or die('ikke kontakt med database-server');
+$melding = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $klassekode = $_POST['klassekode'] ?? '';
+    if ($klassekode !== '') {
+        $kode = mysqli_real_escape_string($db, $klassekode);
+        $sql = "DELETE FROM klasse WHERE klassekode = '$kode'";
+        if (mysqli_query($db, $sql)) {
+            if (mysqli_affected_rows($db) > 0) {
+                $melding = 'Klasse er slettet.';
+            } else {
+                $melding = 'Fant ikke klassekode.';
+            }
+        } else {
+            $melding = 'Feil: ' . mysqli_error($db);
+        }
+    } else {
+        $melding = 'Velg en klasse.';
+    }
+}
+$klasser = mysqli_query($db, "SELECT klassekode FROM klasse ORDER BY klassekode");
+?>
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Slett klasse</title>
+</head>
+<body>
+    <h1>Slett klasse</h1>
+    <p><a href="index.php">Tilbake</a></p>
+    <?php if ($melding !== ''): ?>
+        <p><?php echo htmlspecialchars($melding); ?></p>
+    <?php endif; ?>
+    <form method="post" action="">
+        <label for="klassekode">Klassekode</label>
+        <select name="klassekode" id="klassekode" required>
+            <option value="">-- Velg klasse --</option>
+            <?php if ($klasser): ?>
+                <?php while ($rad = mysqli_fetch_assoc($klasser)): ?>
+                    <option value="<?php echo htmlspecialchars($rad['klassekode']); ?>">
+                        <?php echo htmlspecialchars($rad['klassekode']); ?>
+                    </option>
+                <?php endwhile; ?>
+            <?php endif; ?>
+        </select>
+        <br>
+        <button type="submit">Slett</button>
+    </form>
+</body>
+</html>
