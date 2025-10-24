@@ -11,6 +11,25 @@ if ($database === false) {
     $database = getenv('DB_DATABASE');
 }
 $db = mysqli_connect($host, $username, $password, $database) or die('ikke kontakt med database-server');
+mysqli_set_charset($db, 'utf8mb4');
+function tableExists($db, $name) {
+    $name = mysqli_real_escape_string($db, $name);
+    $res = mysqli_query($db, "SHOW TABLES LIKE '$name'");
+    return $res && mysqli_num_rows($res) > 0;
+}
+if (!tableExists($db, 'klasse') || !tableExists($db, 'student')) {
+    $schemaFile = __DIR__ . '/database.php';
+    if (is_file($schemaFile)) {
+        $sql = file_get_contents($schemaFile);
+        if ($sql !== false && $sql !== '') {
+            $statements = array_filter(array_map('trim', explode(';', $sql)));
+            foreach ($statements as $statement) {
+                if ($statement === '') continue;
+                @mysqli_query($db, $statement);
+            }
+        }
+    }
+}
 mysqli_query($db, "CREATE TABLE IF NOT EXISTS klasse (klassekode CHAR(5) NOT NULL, klassenavn VARCHAR(50) NOT NULL, studiumkode VARCHAR(50) NOT NULL, PRIMARY KEY (klassekode))");
 $melding = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
