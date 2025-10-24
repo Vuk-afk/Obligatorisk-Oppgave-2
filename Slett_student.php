@@ -42,7 +42,6 @@ $studenter = mysqli_query($db, "SELECT brukernavn FROM student ORDER BY brukerna
 </head>
 <body>
     <h1>Slett student</h1>
-    <p><a href="index.php">Tilbake</a></p>
     <?php if ($melding !== ''): ?>
         <p><?php echo htmlspecialchars($melding); ?></p>
     <?php endif; ?>

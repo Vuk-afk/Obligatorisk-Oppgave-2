@@ -11,7 +11,6 @@ $resultat = mysqli_query($db, $sql);
 </head>
 <body>
     <h1>Alle studenter</h1>
-    <p><a href="index.php">Tilbake</a></p>
     <?php if ($resultat && mysqli_num_rows($resultat) > 0): ?>
         <table border="1" cellpadding="4" cellspacing="0">
             <tr>

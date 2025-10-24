@@ -49,7 +49,6 @@ $klasser = mysqli_query($db, "SELECT klassekode FROM klasse ORDER BY klassekode"
 </head>
 <body>
     <h1>Slett klasse</h1>
-    <p><a href="index.php">Tilbake</a></p>
     <?php if ($melding !== ''): ?>
         <p><?php echo htmlspecialchars($melding); ?></p>
     <?php endif; ?>

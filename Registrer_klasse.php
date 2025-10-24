@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Registrer klasse</h1>
-    <p><a href="index.php">Tilbake</a></p>
     <?php if ($melding !== ''): ?>
         <p><?php echo htmlspecialchars($melding); ?></p>
     <?php endif; ?>
