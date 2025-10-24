@@ -5,12 +5,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $klassekode = $_POST['klassekode'] ?? '';
     if ($klassekode !== '') {
         $kode = mysqli_real_escape_string($db, $klassekode);
-        // Finnes klassen?
         $finn = mysqli_query($db, "SELECT 1 FROM klasse WHERE klassekode = '$kode'");
         if (!$finn || mysqli_num_rows($finn) === 0) {
             $melding = 'Klassen finnes ikke.';
         } else {
-            // Har klassen studenter?
             $cntRes = mysqli_query($db, "SELECT COUNT(*) AS c FROM student WHERE klassekode = '$kode'");
             $rad = $cntRes ? mysqli_fetch_assoc($cntRes) : ['c' => 0];
             if (!empty($rad['c']) && (int)$rad['c'] > 0) {

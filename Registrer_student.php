@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include('db-tilkobling.php');
 $melding = '';
 $klasser = mysqli_query($db, "SELECT klassekode, klassenavn FROM klasse ORDER BY klassekode");
@@ -12,12 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fn = mysqli_real_escape_string($db, $fornavn);
         $en = mysqli_real_escape_string($db, $etternavn);
         $kk = mysqli_real_escape_string($db, $klassekode);
-        // Sjekk om brukernavn finnes fra før
         $dupe = mysqli_query($db, "SELECT 1 FROM student WHERE brukernavn = '$bn'");
         if ($dupe && mysqli_num_rows($dupe) > 0) {
             $melding = 'Brukernavn er registrert fra før.';
         } else {
-            // Sjekk om klassekode finnes
             $klasseOK = mysqli_query($db, "SELECT 1 FROM klasse WHERE klassekode = '$kk'");
             if (!$klasseOK || mysqli_num_rows($klasseOK) === 0) {
                 $melding = 'Ugyldig klassekode.';
@@ -80,3 +78,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 </body>
 </html>
+
+

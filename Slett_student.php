@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $brukernavn = $_POST['brukernavn'] ?? '';
     if ($brukernavn !== '') {
         $bn = mysqli_real_escape_string($db, $brukernavn);
-        // Finnes studenten?
         $finn = mysqli_query($db, "SELECT 1 FROM student WHERE brukernavn = '$bn'");
         if (!$finn || mysqli_num_rows($finn) === 0) {
             $melding = 'Studenten finnes ikke.';

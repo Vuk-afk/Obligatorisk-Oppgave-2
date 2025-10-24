@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include('db-tilkobling.php');
 $melding = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $kode = mysqli_real_escape_string($db, $klassekode);
         $navn = mysqli_real_escape_string($db, $klassenavn);
         $studium = mysqli_real_escape_string($db, $studiumkode);
-        // Sjekk om klassekode finnes fra før
         $dupes = mysqli_query($db, "SELECT 1 FROM klasse WHERE klassekode = '$kode'");
         if ($dupes && mysqli_num_rows($dupes) > 0) {
             $melding = 'Klassekode er registrert fra før.';
@@ -57,3 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </body>
 </html>
+
+
